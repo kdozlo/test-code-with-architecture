@@ -1,9 +1,10 @@
 package com.example.demo.service;
 
-import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.model.dto.PostCreateDto;
-import com.example.demo.model.dto.PostUpdateDto;
-import com.example.demo.repository.PostEntity;
+import com.example.demo.common.domain.exception.ResourceNotFoundException;
+import com.example.demo.post.domain.PostCreate;
+import com.example.demo.post.domain.PostUpdate;
+import com.example.demo.post.service.PostService;
+import com.example.demo.post.infrastructure.PostEntity;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ class PostServiceTest {
     @Test
     public void postCreateDto를_이용하여_게시물을_생성할_수_있다() throws Exception {
         //given
-        PostCreateDto postCreateDto = PostCreateDto.builder()
+        PostCreate postCreateDto = PostCreate.builder()
                 .writerId(1)
                 .content("this is test")
                 .build();
@@ -71,7 +72,7 @@ class PostServiceTest {
     @Test
     public void postUpdateDto를_이용하여_게시물을_수정할_수_있다() throws Exception {
         //given
-        PostUpdateDto postUpdateDto = PostUpdateDto.builder()
+        PostUpdate postUpdateDto = PostUpdate.builder()
                 .content("hello world :)")
                 .build();
 
