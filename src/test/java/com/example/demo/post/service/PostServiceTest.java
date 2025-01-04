@@ -1,10 +1,9 @@
 package com.example.demo.post.service;
 
 import com.example.demo.common.domain.exception.ResourceNotFoundException;
+import com.example.demo.post.domain.Post;
 import com.example.demo.post.domain.PostCreate;
 import com.example.demo.post.domain.PostUpdate;
-import com.example.demo.post.service.PostService;
-import com.example.demo.post.infrastructure.PostEntity;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ class PostServiceTest {
         long postId = 1L;
 
         //when
-        PostEntity result = postService.getPostById(postId);
+        Post result = postService.getPostById(postId);
 
         //then
         assertThat(result.getContent()).isEqualTo("helloworld");
@@ -61,7 +60,7 @@ class PostServiceTest {
                 .build();
 
         //when
-        PostEntity result = postService.create(postCreateDto);
+        Post result = postService.create(postCreateDto);
 
         //then
         assertThat(result.getId()).isNotNull();
@@ -80,8 +79,8 @@ class PostServiceTest {
         postService.update(1, postUpdateDto);
 
         //then
-        PostEntity postEntity = postService.getPostById(1);
-        assertThat(postEntity.getContent()).isEqualTo("hello world :)");
-        assertThat(postEntity.getModifiedAt()).isGreaterThan(0);
+        Post post = postService.getPostById(1);
+        assertThat(post.getContent()).isEqualTo("hello world :)");
+        assertThat(post.getModifiedAt()).isGreaterThan(0);
     }
 }

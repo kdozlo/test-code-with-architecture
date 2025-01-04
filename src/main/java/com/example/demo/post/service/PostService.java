@@ -1,12 +1,11 @@
 package com.example.demo.post.service;
 
 import com.example.demo.common.domain.exception.ResourceNotFoundException;
+import com.example.demo.post.domain.Post;
 import com.example.demo.post.domain.PostCreate;
 import com.example.demo.post.domain.PostUpdate;
-import com.example.demo.post.infrastructure.PostEntity;
 import com.example.demo.post.service.port.PostRepository;
-import com.example.demo.user.infrastructure.UserEntity;
-import java.time.Clock;
+import com.example.demo.user.domain.User;
 
 import com.example.demo.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -19,23 +18,21 @@ public class PostService {
     private final PostRepository postRepository;
     private final UserService userService;
 
-    public PostEntity getPostById(long id) {
+    public Post getPostById(long id) {
         return postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Posts", id));
     }
 
-    public PostEntity create(PostCreate postCreateDto) {
-        UserEntity userEntity = userService.getById(postCreateDto.getWriterId());
-        PostEntity postEntity = new PostEntity();
-        postEntity.setWriter(userEntity);
-        postEntity.setContent(postCreateDto.getContent());
-        postEntity.setCreatedAt(Clock.systemUTC().millis());
-        return postRepository.save(postEntity);
+    public Post create(PostCreate postCreateDto) {
+        User writer = userService.getById(postCreateDto.getWriterId());
+        Post post = Post.from(postCreateDto, writer);
+
+        return postRepository.save(post);
     }
 
-    public PostEntity update(long id, PostUpdate postUpdateDto) {
-        PostEntity postEntity = getPostById(id);
-        postEntity.setContent(postUpdateDto.getContent());
-        postEntity.setModifiedAt(Clock.systemUTC().millis());
-        return postRepository.save(postEntity);
+    public Post update(long id, PostUpdate postUpdateDto) {
+        Post post = getPostById(id);
+        post = post.update(postUpdateDto);
+
+        return postRepository.save(post);
     }
 }
