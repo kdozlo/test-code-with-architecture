@@ -9,15 +9,18 @@ import com.example.demo.post.service.port.PostRepository;
 import com.example.demo.user.domain.User;
 
 import com.example.demo.user.service.UserService;
+import com.example.demo.user.service.port.UserRepository;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@Builder
 @RequiredArgsConstructor
 public class PostService {
 
     private final PostRepository postRepository;
-    private final UserService userService;
+    private final UserRepository userRepository;
     private final ClockHolder clockHolder;
 
     public Post getPostById(long id) {
@@ -25,7 +28,7 @@ public class PostService {
     }
 
     public Post create(PostCreate postCreateDto) {
-        User writer = userService.getById(postCreateDto.getWriterId());
+        User writer = userRepository.getById(postCreateDto.getWriterId());
         Post post = Post.from(postCreateDto, writer, clockHolder);
 
         return postRepository.save(post);

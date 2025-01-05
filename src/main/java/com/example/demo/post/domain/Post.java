@@ -5,8 +5,6 @@ import com.example.demo.user.domain.User;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.time.Clock;
-
 @Getter
 public class Post {
 

@@ -40,6 +40,35 @@ public class PostTest {
         assertThat(post.getWriter().getStatus()).isEqualTo(UserStatus.ACTIVE);
         assertThat(post.getWriter().getCertificationCode()).isEqualTo("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
         assertThat(post.getCreatedAt()).isEqualTo(1679530673958L);
-
     }
+
+    @Test
+    public void PostUpdate로_게시물을_수정할_수_있다() throws Exception {
+        //given
+        Post post = Post.builder()
+                .content("helloworld")
+                .createdAt(0L)
+                .modifiedAt(0L)
+                .writer(User.builder()
+                        .id(1L)
+                        .email("test@test.com")
+                        .nickname("test")
+                        .address("Masan")
+                        .status(UserStatus.ACTIVE)
+                        .certificationCode("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa")
+                        .build())
+                .build();
+
+        PostUpdate postUpdate = PostUpdate.builder()
+                .content("helloworld :)")
+                .build();
+
+        //when
+        post = post.update(postUpdate, new TestClockHolder(123456L));
+
+        //then
+        assertThat(post.getContent()).isEqualTo("helloworld :)");
+        assertThat(post.getModifiedAt()).isEqualTo(123456L);
+    }
+
 }
