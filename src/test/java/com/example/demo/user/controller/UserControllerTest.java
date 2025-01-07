@@ -32,7 +32,7 @@ class UserControllerTest {
                 .build());
 
         //when
-        ResponseEntity<UserResponse> result = testContainer.userController.getUserById(1L);
+        ResponseEntity<UserResponse> result = testContainer.userController.getById(1L);
 
         //then
         assertThat(result.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(200));
@@ -53,7 +53,7 @@ class UserControllerTest {
 
         //then
         assertThatThrownBy(() -> {
-            testContainer.userController.getUserById(123456L);
+            testContainer.userController.getById(123456L);
         }).isInstanceOf(ResourceNotFoundException.class);
     }
 
@@ -119,7 +119,7 @@ class UserControllerTest {
                 .build());
 
         //when
-        ResponseEntity<MyProfileResponse> result = testContainer.userController.getMyInfo("test@test.com");
+        ResponseEntity<MyProfileResponse> result = testContainer.myInfoController.getMyInfo("test@test.com");
 
         //then
         assertThat(result.getStatusCode()).isEqualTo(HttpStatusCode.valueOf(200));
@@ -149,7 +149,7 @@ class UserControllerTest {
                 .build());
 
         //when
-        ResponseEntity<MyProfileResponse> result = testContainer.userController
+        ResponseEntity<MyProfileResponse> result = testContainer.myInfoController
                 .updateMyInfo("test@test.com", UserUpdateRequest.builder()
                         .nickname("test2")
                         .address("Seoul")
