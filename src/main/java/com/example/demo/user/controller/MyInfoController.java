@@ -42,7 +42,7 @@ public class MyInfoController {
             @RequestBody UserUpdateRequest userUpdateRequest
     ) {
         User user = userService.getByEmail(email);
-        user = userService.update(user.getId(), userUpdateRequest);
+        user = userService.update(user.getId(), userUpdateRequest.to());
         return ResponseEntity
                 .ok()
                 .body(MyProfileResponse.from(user));

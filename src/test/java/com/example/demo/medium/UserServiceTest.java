@@ -113,7 +113,7 @@ class UserServiceTest {
     @Test
     public void userUpdateDto를_이용하여_유저를_수정할_수_있다() throws Exception {
         //given
-        UserUpdateRequest userUpdate = UserUpdateRequest.builder()
+        UserUpdate userUpdate = UserUpdate.builder()
                 .address("Masan")
                 .nickname("kdy")
                 .build();
