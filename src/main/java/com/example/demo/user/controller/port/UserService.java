@@ -1,8 +1,8 @@
 package com.example.demo.user.controller.port;
 
+import com.example.demo.user.controller.request.UserUpdateRequest;
 import com.example.demo.user.domain.User;
 import com.example.demo.user.domain.UserCreate;
-import com.example.demo.user.domain.UserUpdate;
 
 public interface UserService {
 
@@ -12,7 +12,7 @@ public interface UserService {
 
     User create(UserCreate userCreate);
 
-    User update(long id, UserUpdate userUpdate);
+    User update(long id, UserUpdateRequest userUpdate);
 
     void login(long id);
 

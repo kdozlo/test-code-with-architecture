@@ -6,6 +6,7 @@ import com.example.demo.mock.FakeMaliSender;
 import com.example.demo.mock.FakeUserRepository;
 import com.example.demo.mock.TestClockHolder;
 import com.example.demo.mock.TestUuidHolder;
+import com.example.demo.user.controller.request.UserUpdateRequest;
 import com.example.demo.user.domain.User;
 import com.example.demo.user.domain.UserStatus;
 import com.example.demo.user.domain.UserCreate;
@@ -128,7 +129,7 @@ class UserServiceTest {
     @Test
     public void userUpdate를_이용하여_유저를_수정할_수_있다() throws Exception {
         //given
-        UserUpdate userUpdate = UserUpdate.builder()
+        UserUpdateRequest userUpdate = UserUpdateRequest.builder()
                 .address("Masan")
                 .nickname("kdy")
                 .build();

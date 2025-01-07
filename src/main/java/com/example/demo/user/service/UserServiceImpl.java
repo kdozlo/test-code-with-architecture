@@ -4,6 +4,7 @@ import com.example.demo.common.domain.exception.ResourceNotFoundException;
 import com.example.demo.common.service.port.ClockHolder;
 import com.example.demo.common.service.port.UuidHolder;
 import com.example.demo.user.controller.port.*;
+import com.example.demo.user.controller.request.UserUpdateRequest;
 import com.example.demo.user.domain.User;
 import com.example.demo.user.domain.UserStatus;
 import com.example.demo.user.domain.UserCreate;
@@ -45,9 +46,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public User update(long id, UserUpdate userUpdate) {
+    public User update(long id, UserUpdateRequest userUpdateRequest) {
         User user = getById(id);
-        user = user.update(userUpdate);
+        user = user.update(userUpdateRequest.to());
         user = userRepository.save(user);
 
         return user;

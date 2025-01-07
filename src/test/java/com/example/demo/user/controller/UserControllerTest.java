@@ -3,11 +3,11 @@ package com.example.demo.user.controller;
 import com.example.demo.common.domain.exception.CertificationCodeNotMatchedException;
 import com.example.demo.common.domain.exception.ResourceNotFoundException;
 import com.example.demo.mock.TestContainer;
+import com.example.demo.user.controller.request.UserUpdateRequest;
 import com.example.demo.user.controller.response.MyProfileResponse;
 import com.example.demo.user.controller.response.UserResponse;
 import com.example.demo.user.domain.User;
 import com.example.demo.user.domain.UserStatus;
-import com.example.demo.user.domain.UserUpdate;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -150,7 +150,7 @@ class UserControllerTest {
 
         //when
         ResponseEntity<MyProfileResponse> result = testContainer.userController
-                .updateMyInfo("test@test.com", UserUpdate.builder()
+                .updateMyInfo("test@test.com", UserUpdateRequest.builder()
                         .nickname("test2")
                         .address("Seoul")
                         .build());
